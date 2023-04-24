@@ -1,5 +1,6 @@
 export * from './DashboardPage'
 export * from './GamesPage'
 export * from './PlayersPage'
+export * from './ProfilePage'
 export * from './StatsPage'
 export * from './UsersPage'
