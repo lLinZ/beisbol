@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-export const AdminPlayersPage: FC = () => {
+export const PlayersPage: FC = () => {
     return (
         <div>AdminPlayersPage</div>
     )
