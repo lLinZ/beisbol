@@ -1,7 +1,8 @@
 import { FC } from 'react'
+import { Layout } from '../../components/ui'
 
 export const ProfilePage: FC = () => {
     return (
-        <div>ProfilePage</div>
+        <Layout>ProfilePage</Layout>
     )
 }

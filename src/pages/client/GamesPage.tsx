@@ -1,7 +1,8 @@
 import { FC } from 'react'
+import { Layout } from '../../components/ui'
 
 export const GamesPage: FC = () => {
     return (
-        <div>GamesPage</div>
+        <Layout>GamesPage</Layout>
     )
 }

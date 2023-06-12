@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Divider, Drawer, Grid, IconButton, Toolbar, useTheme } from '@mui/material';
+import { AppBar, Box, Button, Divider, Drawer, Grid, IconButton, Toolbar, Typography, useTheme } from '@mui/material';
 import { Dispatch, SetStateAction, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import MenuRounded from '@mui/icons-material/MenuRounded';
@@ -15,7 +15,7 @@ export const Layout = (props: Props) => {
     return (
         <Box>
             <NavBar />
-            <Box sx={{ width: '100%' }}>
+            <Box sx={styles.main}>
                 <Toolbar />
                 {props.children}
             </Box>
@@ -31,6 +31,8 @@ const NavBar = () => {
     return (
         <AppBar elevation={0}>
             <Toolbar>
+
+
                 <IconButton onClick={onClick}>
                     <MenuRounded />
                 </IconButton>
@@ -59,10 +61,14 @@ const SideBar = (props: SideBarProps) => {
     return (
         <Drawer open={props.open} anchor='left'>
             <Toolbar sx={{ display: 'flex', justifyContent: 'end' }}>
+                <Box sx={{ width: '100%' }}>
+                    <Typography variant='h5' sx={{ fontFamily: 'Open Sans', fontWeight: 'bold' }}>BeisbolApp</Typography>
+                </Box>
                 <IconButton onClick={() => props.setOpen(false)}>
                     <CloseRounded />
                 </IconButton>
             </Toolbar>
+            <Divider />
             <Box sx={{ width: 250 }}>
                 {clientLinks.map((link) => (
                     <Box>
@@ -73,4 +79,11 @@ const SideBar = (props: SideBarProps) => {
             </Box>
         </Drawer>
     )
+}
+const styles = {
+    main: {
+        width: { xs: '100%', sm: '90%', md: '80%' },
+        margin: 'auto',
+        padding: { xs: 1, sm: 2, md: 2 },
+    }
 }

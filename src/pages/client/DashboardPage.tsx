@@ -1,10 +1,12 @@
 import { FC } from 'react';
 import { Layout } from '../../components/ui';
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 export const DashboardPage: FC = () => {
     return (
         <Layout>
-            <Typography>Dashboard Page</Typography>
+            <Box>
+                <Typography>Dashboard Page</Typography>
+            </Box>
         </Layout>
     )
 }
