@@ -1,7 +1,10 @@
-import { FC } from 'react'
-
+import { FC } from 'react';
+import { Layout } from '../../components/ui';
+import { Typography } from '@mui/material';
 export const DashboardPage: FC = () => {
     return (
-        <div>DashboardPage</div>
+        <Layout>
+            <Typography>Dashboard Page</Typography>
+        </Layout>
     )
 }
