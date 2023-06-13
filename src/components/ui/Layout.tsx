@@ -7,6 +7,7 @@ import DashboardRounded from '@mui/icons-material/DashboardRounded';
 import PersonRounded from '@mui/icons-material/PersonRounded';
 import SportsBaseballRounded from '@mui/icons-material/SportsBaseballRounded';
 import GroupRounded from '@mui/icons-material/GroupRounded';
+import AccountCircleRounded from '@mui/icons-material/AccountCircleRounded';
 type Props = {
     children: React.ReactNode;
 }
@@ -30,11 +31,12 @@ const NavBar = () => {
     }
     return (
         <AppBar elevation={0}>
-            <Toolbar>
-
-
+            <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <IconButton onClick={onClick}>
                     <MenuRounded />
+                </IconButton>
+                <IconButton>
+                    <AccountCircleRounded />
                 </IconButton>
             </Toolbar>
             <SideBar open={open} setOpen={setOpen} />

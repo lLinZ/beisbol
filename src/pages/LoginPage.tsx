@@ -2,16 +2,19 @@ import { ArrowBackRounded, WhatsApp, Instagram, Twitter, Facebook } from '@mui/i
 import { Box, Button, Typography, TextField, IconButton } from '@mui/material';
 import { blue, green, lightBlue } from '@mui/material/colors';
 import { FC, useContext, useState } from 'react';
-import { Form, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth';
-import { FormikValues, FormikState, Formik } from 'formik';
+import { FormikValues, FormikState, Formik, Form } from 'formik';
 import Swal from 'sweetalert2';
 import * as Yup from 'yup';
 import { createCookie } from '../helpers/functions';
+import LoadingButton from '@mui/lab/LoadingButton';
+
 const initialValues = {
     email: "",
     password: "",
 }
+
 const SigninSchema = Yup.object().shape({
     email: Yup.string()
         .email("Email inválido")
@@ -20,7 +23,8 @@ const SigninSchema = Yup.object().shape({
     password: Yup.string()
         .required('Campo obligatorio'),
 })
-const LoginPage: FC = () => {
+
+export const LoginPage: FC = () => {
     // const { logIn, nombres } = useContext(AuthContext)
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const router = useNavigate();
@@ -124,8 +128,8 @@ const LoginPage: FC = () => {
             <Box sx={styles.mainContainer}>
                 <Box sx={styles.loginContainer}>
                     <Button onClick={() => router("/")} startIcon={<ArrowBackRounded />} sx={{ ...styles.link, mb: 4 }}>Volver al inicio</Button>
-                    <Typography variant="h4" sx={{ fontFamily: "Plus Jakarta Sans", fontWeight: "800" }}>Iniciar sesión</Typography>
-                    <Typography variant="subtitle2" color="text.secondary" sx={{ fontFamily: "Plus Jakarta Sans", mb: 4 }}>Inicia para poder acceder a diferentes caracteristicas dentro de nuestro sitio web!</Typography>
+                    <Typography variant="h4" sx={{ fontFamily: "Open Sans", fontWeight: "bold" }}>Iniciar sesión</Typography>
+                    <Typography variant="subtitle2" color="text.secondary" sx={{ fontFamily: "Ubuntu", mb: 4 }}>Inicia para poder acceder a diferentes caracteristicas dentro de nuestro sitio web!</Typography>
                     <Formik
                         initialValues={initialValues}
                         onSubmit={(values, { resetForm }) => onSubmit(values, resetForm)}
@@ -136,12 +140,12 @@ const LoginPage: FC = () => {
 
                                 <TextField label="Email" name="email" value={values.email} onChange={handleChange} fullWidth sx={styles.input} />
                                 <TextField label="Contraseña" name="password" value={values.password} onChange={handleChange} fullWidth sx={styles.input} />
-                                {/* <LoadingButton type="submit" color="primary" variant="contained" sx={styles.button} disableElevation fullWidth disabled={isSubmitting} loading={isSubmitting}>Iniciar</LoadingButton> */}
+                                <LoadingButton type="submit" color="primary" variant="contained" sx={styles.button} disableElevation fullWidth disabled={isSubmitting} loading={isSubmitting}>Iniciar</LoadingButton>
                             </Form>
                         )}
                     </Formik>
                     <Box sx={styles.linkContainer}>
-                        <Typography variant="subtitle1" sx={{ p: 1 }}>¿No tienes cuenta? &nbsp;</Typography>
+                        <Typography variant="subtitle1" sx={{ p: 1, fontFamily: 'Ubuntu' }}>¿No tienes cuenta? &nbsp;</Typography>
                         <Button sx={{ ...styles.link }} onClick={() => router("/auth/register")}>Registrate aquí</Button>
                     </Box>
 
@@ -184,7 +188,7 @@ const styles = {
             borderRadius: "30px",
         },
         "& input": {
-            fontFamily: "Plus Jakarta Sans"
+            fontFamily: "Open Sans"
         },
     },
     button: {
@@ -199,7 +203,7 @@ const styles = {
         textTransform: "none",
         borderRadius: "30px",
         fontWeight: "bold",
-        fontFamily: "Plus Jakarta Sans"
+        fontFamily: "Open Sans",
     },
     linkContainer: {
         display: "flex",
