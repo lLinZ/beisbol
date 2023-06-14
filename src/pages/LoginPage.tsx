@@ -25,102 +25,17 @@ const SigninSchema = Yup.object().shape({
 })
 
 export const LoginPage: FC = () => {
-    // const { logIn, nombres } = useContext(AuthContext)
+    const { authState, userLogin } = useContext(AuthContext)
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const router = useNavigate();
-    const onSubmit = async (values: FormikValues, resetForm: (nextState?: Partial<FormikState<{ email: string; password: string; }>> | undefined) => void) => {
+    const onSubmit = async (values: FormikValues, resetForm: (nextState?: Partial<FormikState<{ email: string; password: string; }>> | undefined) => void | boolean) => {
         setIsSubmitting(true);
-        const url = "/api/auth/login";
-
-        const body = JSON.stringify({
-            email: values.email,
-            password: values.password,
-        })
-        const options = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body
-        }
-
-        try {
-            const respuesta = await fetch(url, options)
-            switch (respuesta.status) {
-                case 200:
-                    const { message, user } = await respuesta.json();
-                    // logIn(user);
-                    resetForm();
-                    createCookie('token', user.token);
-                    createCookie('email', user.email);
-                    Swal.fire({
-                        title: `Éxito`,
-                        text: `¡Que bueno verte de vuelta ${user.nombres}!`,
-                        icon: "success",
-                        timer: 2000,
-                        timerProgressBar: true,
-                        showConfirmButton: false,
-                    })
-                    setIsSubmitting(false);
-
-                    setTimeout(() => {
-                        router("/");
-                    }, 2000)
-                    break;
-                case 204:
-                    Swal.fire({
-                        title: "Oops...",
-                        text: "No se encontró el usuario",
-                        icon: "warning",
-                        timer: 2000,
-                        timerProgressBar: true,
-                        showConfirmButton: false,
-                    })
-                    setIsSubmitting(false);
-                    break;
-                case 400:
-                    const { errors } = await respuesta.json();
-                    let errorString = "";
-                    errors.forEach((e: string) => errorString += `<p>- ${e}</p>`)
-                    Swal.fire({
-                        title: "Error",
-                        html: errorString,
-                        icon: "error",
-                    })
-                    setIsSubmitting(false);
-                    break;
-                case 500:
-                    Swal.fire({
-                        title: "Oops...",
-                        text: "Ocurrio un error al iniciar sesion, intente más tarde",
-                        icon: "error",
-                        timer: 2000,
-                        timerProgressBar: true,
-                        showConfirmButton: false,
-                    })
-                    setIsSubmitting(false);
-                    break;
-                default:
-                    Swal.fire({
-                        title: "Oops...",
-                        text: "¡No se encontró el usuario!",
-                        icon: "warning",
-                        timer: 2000,
-                        timerProgressBar: true,
-                        showConfirmButton: false,
-                    })
-                    setIsSubmitting(false);
-                    break;
-            }
-        } catch (error) {
-            console.log(error);
-            Swal.fire({
-                title: "Error",
-                text: "No se logró conectar al servidor",
-                icon: "error"
-            })
+        if (!values.email || !values.password) {
             setIsSubmitting(false);
+            return false;
         }
+        userLogin(values.email, values.password);
+        setIsSubmitting(false);
     }
 
     return (

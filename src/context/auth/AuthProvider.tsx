@@ -18,12 +18,9 @@ const initialState: any = {
 }
 export const AuthProvider: FC<Props> = ({ children }) => {
     const [authState, dispatch] = useReducer(authReducer, initialState);
-
-
     const logout = () => {
 
     }
-
     const userLogin: (email: string, password: string) => Promise<{ status: boolean; user?: any; message: string; }> = async (email, password) => {
 
         if (!email || !password) return { status: false, message: 'Campos vacios' };
